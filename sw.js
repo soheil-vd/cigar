@@ -3,6 +3,9 @@ const urlsToCache = [
   './',
   './index.html',
   './products.json',
+  './images/winston-light.jpg',
+  './images/marlboro-gold.jpg',
+  './images/bahman.jpg',
   './images/icon-192x192.png',
   './images/icon-512x512.png',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
@@ -16,6 +19,9 @@ self.addEventListener('install', (event) => {
       .then((cache) => {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
+      })
+      .catch(error => {
+        console.error('Cache installation failed:', error);
       })
   );
 });
