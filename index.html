@@ -11,11 +11,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
 
         :root {
-            --primary-color: #007bff;
-            --secondary-color: #6c757d;
-            --text-dark: #343a40;
-            --price-color: #1a73e8;
-            --bg-light: #f8f9fa;
+            --primary-color: #34495e; /* Midnight Blue */
+            --secondary-color: #7f8c8d; /* Gray */
+            --text-dark: #2c3e50; /* Darker Blue */
+            --price-color: #27ae60; /* Green */
+            --bg-light: #ecf0f1; /* Light Gray */
+            --card-bg: #ffffff; /* White */
+            --header-bg: linear-gradient(135deg, #2c3e50, #3498db);
         }
 
         body {
@@ -25,7 +27,7 @@
         }
 
         .main-header {
-            background-image: linear-gradient(135deg, #007bff, #1a73e8);
+            background-image: var(--header-bg);
             color: white;
             padding: 4rem 0;
             border-bottom-left-radius: 50% 20px;
@@ -62,8 +64,9 @@
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            direction: ltr; /* Ensure horizontal scroll works left-to-right */
         }
-
+        
         .category-container::-webkit-scrollbar {
             display: none;
         }
@@ -72,13 +75,14 @@
             display: inline-block;
             padding: 0.5rem 1.5rem;
             margin: 0.5rem;
-            background-color: white;
+            background-color: var(--card-bg);
             color: var(--text-dark);
             border-radius: 25px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             cursor: pointer;
             font-weight: 500;
+            direction: rtl;
         }
         
         .category-badge.active, .category-badge:hover {
@@ -94,7 +98,7 @@
             height: 100%;
             border: none;
             border-radius: 12px;
-            background-color: white;
+            background-color: var(--card-bg);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -192,6 +196,9 @@
             .price-text {
                 font-size: 1.2rem;
             }
+            .category-container {
+                direction: rtl; /* For touch scrolling, ensure it starts from the right */
+            }
         }
     </style>
 </head>
@@ -206,11 +213,14 @@
 
 <div class="container mt-4">
     <div id="category-badges" class="category-container">
-        </div>
+        <!-- Category badges will be dynamically loaded here -->
+    </div>
     <div id="product-list" class="row g-4 mt-4">
-        </div>
+        <!-- Products will be dynamically loaded here -->
+    </div>
 </div>
 
+<!-- Floating WhatsApp Button -->
 <a href="https://wa.me/989123456789" class="btn btn-success whatsapp-float-btn" target="_blank">
     <i class="fab fa-whatsapp me-2"></i> ارتباط از طریق واتساپ
 </a>
