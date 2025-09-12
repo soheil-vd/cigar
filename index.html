@@ -58,7 +58,7 @@
         }
         
         .update-text {
-            color: #ccc;
+            color: #eee; /* Increased contrast */
             font-size: 0.9rem; /* Optimized for mobile */
             font-weight: 500;
         }
@@ -87,7 +87,7 @@
         .category-badge {
             display: inline-block;
             padding: 0.7rem 2rem;
-            margin: 0.5rem;
+            margin: 0.5rem 0.75rem; /* Increased spacing */
             background-color: var(--card-bg);
             color: var(--text-dark);
             border-radius: 30px;
@@ -123,8 +123,8 @@
 
         .card-img-top {
             width: 100%;
-            height: 250px;
-            object-fit: contain;
+            aspect-ratio: 4/3; /* Added for consistent image proportions */
+            object-fit: cover; /* Changed to cover for better image handling */
             background-color: white;
             padding: 1.5rem;
         }
@@ -196,14 +196,14 @@
                 border-radius: 10px;
                 text-align: center;
                 font-size: 18px;
-                animation: none;
+                animation: subtle-pulse 3s infinite; /* Added subtle animation */
                 padding: 1rem;
             }
             .main-title {
-                font-size: 2rem;
+                font-size: 1.8rem; /* Reduced font size */
             }
             .card-img-top {
-                height: 180px;
+                aspect-ratio: 4/3; /* Consistent for mobile */
             }
             .card-title {
                 font-size: 1.3rem;
@@ -214,6 +214,12 @@
             .category-container {
                 direction: rtl;
             }
+        }
+
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
