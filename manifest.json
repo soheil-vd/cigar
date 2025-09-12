@@ -1,7 +1,7 @@
 {
-  "name": "بازرگانی وطن دوست",
-  "short_name": "وطن دوست",
-  "description": "لیست قیمت ویژه همکاران بازرگانی وطن دوست",
+  "name": "لیست قیمت سیگار",
+  "short_name": "سیگار",
+  "description": "لیست قیمت ویژه همکاران سیگار",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f8f9fa",
