@@ -24,26 +24,68 @@
             color: var(--text-dark);
         }
 
+        .main-header {
+            background-image: linear-gradient(135deg, #007bff, #1a73e8);
+            color: white;
+            padding: 4rem 0;
+            border-bottom-left-radius: 50% 20px;
+            border-bottom-right-radius: 50% 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
         .main-title {
-            color: var(--primary-color);
+            color: white;
             font-weight: 700;
             font-size: 2.5rem;
             position: relative;
             padding-bottom: 1rem;
-            margin-bottom: 3rem !important;
+            margin-bottom: 1rem !important;
         }
-        
+
         .main-title::after {
             content: '';
             display: block;
             width: 80px;
             height: 4px;
-            background: var(--price-color);
+            background: white;
             border-radius: 2px;
             position: absolute;
             bottom: 0;
             right: 50%;
             transform: translateX(50%);
+        }
+
+        .category-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 1rem 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .category-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+            background-color: white;
+            color: var(--text-dark);
+            border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .category-badge.active, .category-badge:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
 
         .product-card {
@@ -57,7 +99,7 @@
             display: flex;
             flex-direction: column;
         }
-
+        
         .product-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.12);
@@ -70,7 +112,7 @@
             background-color: white;
             padding: 1.5rem;
         }
-
+        
         .card-body {
             display: flex;
             flex-direction: column;
@@ -79,20 +121,20 @@
             padding: 1.5rem;
             flex-grow: 1;
         }
-
+        
         .card-title {
             font-weight: 600;
             font-size: 1.25rem;
             color: var(--text-dark);
         }
-
+        
         .card-text {
             font-size: 0.95rem;
             color: var(--secondary-color);
             margin-top: 0.5rem;
             flex-grow: 1;
         }
-
+        
         .price-text {
             font-size: 1.5rem;
             font-weight: 700;
@@ -115,13 +157,19 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transition: transform 0.2s ease-in-out;
             border-radius: 50px;
+            animation: pulse-animation 2s infinite;
         }
         
         .whatsapp-float-btn:hover {
             transform: scale(1.05);
         }
 
-        /* Responsive styles for mobile */
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+
         @media (max-width: 767.98px) {
             .whatsapp-float-btn {
                 width: 90%;
@@ -130,6 +178,7 @@
                 border-radius: 10px;
                 text-align: center;
                 font-size: 16px;
+                animation: none;
             }
             .main-title {
                 font-size: 2rem;
@@ -148,10 +197,17 @@
 </head>
 <body>
 
-<div class="container py-5">
-    <h1 class="text-center main-title">لیست قیمت - ویژه همکاران</h1>
-    <p class="text-center text-muted">آخرین به‌روزرسانی: <span id="last-updated"></span></p>
-    <div id="product-list" class="row g-4">
+<div class="main-header text-center">
+    <div class="container py-5">
+        <h1 class="main-title">لیست قیمت - ویژه همکاران</h1>
+        <p class="text-white-50">آخرین به‌روزرسانی: <span id="last-updated"></span></p>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div id="category-badges" class="category-container">
+        </div>
+    <div id="product-list" class="row g-4 mt-4">
         </div>
 </div>
 
@@ -160,6 +216,8 @@
 </a>
 
 <script>
+    let allCategories = [];
+
     fetch('./products.json')
         .then(response => {
             if (!response.ok) {
@@ -168,60 +226,85 @@
             return response.json();
         })
         .then(data => {
-            const productList = document.getElementById('product-list');
+            allCategories = data.categories;
             const lastUpdatedElement = document.getElementById('last-updated');
-
-            // نمایش تاریخ به‌روزرسانی داینامیک
             const currentDate = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
             const persianDate = new Intl.DateTimeFormat('fa-IR', options).format(currentDate);
             lastUpdatedElement.textContent = persianDate;
-
-            // Loop through categories
-            if (data.categories && Array.isArray(data.categories) && data.categories.length > 0) {
-                data.categories.forEach(category => {
-                    // Create a heading for each category
-                    const categoryDiv = document.createElement('div');
-                    categoryDiv.className = 'col-12';
-                    categoryDiv.innerHTML = `<h2 class="text-center my-5 fw-bold text-secondary">${category.category_name}</h2>`;
-                    productList.appendChild(categoryDiv);
-
-                    // Loop through products in each category
-                    if (category.products && Array.isArray(category.products) && category.products.length > 0) {
-                        const productRow = document.createElement('div');
-                        productRow.className = 'row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 w-100 mx-auto';
-                        
-                        category.products.forEach(product => {
-                            const colDiv = document.createElement('div');
-                            colDiv.className = 'col';
-
-                            const cardHtml = `
-                                <div class="card product-card">
-                                    <img src="${product.image}" class="card-img-top" alt="${product.name}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${product.name}</h5>
-                                        <p class="card-text">${product.description}</p>
-                                        <div class="price-text mt-auto">
-                                            <span>${product.price}</span>
-                                            <span class="price-currency">تومان</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                            colDiv.innerHTML = cardHtml;
-                            productRow.appendChild(colDiv);
-                        });
-                        productList.appendChild(productRow);
-                    }
-                });
-            } else {
-                productList.innerHTML = `<p class="text-center text-muted col-12">در حال حاضر محصولی برای نمایش وجود ندارد.</p>`;
-            }
+            
+            renderCategories(allCategories);
+            renderProducts(allCategories);
         })
         .catch(error => {
             console.error('خطا:', error);
             document.getElementById('product-list').innerHTML = `<p class="text-center text-danger col-12">خطا در بارگذاری اطلاعات محصولات. لطفاً از وجود فایل و ساختار صحیح آن اطمینان حاصل کنید.</p>`;
         });
+
+    function renderCategories(categories) {
+        const categoryBadgesContainer = document.getElementById('category-badges');
+        categoryBadgesContainer.innerHTML = `<span class="category-badge active" data-category="all">همه</span>`;
+        
+        categories.forEach(category => {
+            const badge = document.createElement('span');
+            badge.className = 'category-badge';
+            badge.textContent = category.category_name;
+            badge.dataset.category = category.category_name;
+            badge.addEventListener('click', () => {
+                document.querySelectorAll('.category-badge').forEach(b => b.classList.remove('active'));
+                badge.classList.add('active');
+                if (badge.dataset.category === 'all') {
+                    renderProducts(allCategories);
+                } else {
+                    const filteredCategory = allCategories.filter(cat => cat.category_name === badge.dataset.category);
+                    renderProducts(filteredCategory);
+                }
+            });
+            categoryBadgesContainer.appendChild(badge);
+        });
+    }
+
+    function renderProducts(categories) {
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
+        
+        categories.forEach(category => {
+            if (category.products && Array.isArray(category.products) && category.products.length > 0) {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'col-12';
+                categoryDiv.innerHTML = `<h2 class="text-center my-5 fw-bold text-secondary">${category.category_name}</h2>`;
+                productList.appendChild(categoryDiv);
+
+                const productRow = document.createElement('div');
+                productRow.className = 'row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 w-100 mx-auto';
+                
+                category.products.forEach(product => {
+                    const colDiv = document.createElement('div');
+                    colDiv.className = 'col';
+                    const cardHtml = `
+                        <div class="card product-card">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.description}</p>
+                                <div class="price-text mt-auto">
+                                    <span>${product.price}</span>
+                                    <span class="price-currency">تومان</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    colDiv.innerHTML = cardHtml;
+                    productRow.appendChild(colDiv);
+                });
+                productList.appendChild(productRow);
+            }
+        });
+        
+        if (productList.innerHTML.trim() === '') {
+            productList.innerHTML = `<p class="text-center text-muted col-12">در حال حاضر محصولی برای نمایش در این دسته وجود ندارد.</p>`;
+        }
+    }
 </script>
 
 <script>
