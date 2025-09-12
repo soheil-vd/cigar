@@ -53,6 +53,8 @@
             border-radius: 12px;
             background-color: white;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
@@ -74,6 +76,7 @@
             align-items: center;
             text-align: center;
             padding: 1.5rem;
+            flex-grow: 1;
         }
 
         .card-title {
@@ -101,6 +104,21 @@
             font-weight: 500;
             color: var(--price-color);
         }
+
+        .whatsapp-float-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease-in-out;
+            border-radius: 50px;
+        }
+
+        .whatsapp-float-btn:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -109,8 +127,14 @@
     <h1 class="text-center main-title">لیست قیمت - ویژه همکاران</h1>
     <p class="text-center text-muted">آخرین به‌روزرسانی: <span id="last-updated"></span></p>
     <div id="product-list" class="row g-4">
-        </div>
+        <!-- Products will be dynamically loaded here -->
+    </div>
 </div>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/989123456789" class="btn btn-success whatsapp-float-btn" target="_blank">
+    <i class="fab fa-whatsapp me-2"></i> ارتباط از طریق واتساپ
+</a>
 
 <script>
     fetch('./products.json')
@@ -158,9 +182,6 @@
                                             <span>${product.price}</span>
                                             <span class="price-currency">تومان</span>
                                         </div>
-                                        <a href="${product.whatsapp_link}" class="btn btn-success mt-3" target="_blank">
-                                            <i class="fab fa-whatsapp"></i> ارتباط از طریق واتساپ
-                                        </a>
                                     </div>
                                 </div>
                             `;
