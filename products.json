@@ -1,0 +1,36 @@
+{
+  "last_updated_jalali": "۱۴۰۳/۰۴/۰۳",
+  "categories": [
+    {
+      "category_name": "لوازم الکترونیکی",
+      "products": [
+        {
+          "name": "دوربین دیجیتال",
+          "price": "۵,۵۰۰,۰۰۰",
+          "description": "دوربین حرفه‌ای با لنز قابل تعویض و کیفیت ۴K.",
+          "image": "images/camera.jpg",
+          "whatsapp_link": "https://wa.me/989123456789?text=سلام،%20در%20مورد%20دوربین%20دیجیتال%20سوال%20داشتم."
+        },
+        {
+          "name": "ساعت هوشمند",
+          "price": "۱,۷۰۰,۰۰۰",
+          "description": "ساعت با سنسور ضربان قلب و نمایشگر AMOLED.",
+          "image": "images/smartwatch.png",
+          "whatsapp_link": "https://wa.me/989123456789?text=سلام،%20در%20مورد%20ساعت%20هوشمند%20سوال%20داشتم."
+        }
+      ]
+    },
+    {
+      "category_name": "تجهیزات جانبی",
+      "products": [
+        {
+          "name": "کیبورد مکانیکی",
+          "price": "۲,۱۰۰,۰۰۰",
+          "description": "کیبورد مکانیکی با نورپردازی RGB و کلیدهای Cherry MX.",
+          "image": "images/keyboard.jpg",
+          "whatsapp_link": "https://wa.me/989123456789?text=سلام،%20در%20مورد%20کیبورد%20مکانیکی%20سوال%20داشتم."
+        }
+      ]
+    }
+  ]
+}
