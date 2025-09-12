@@ -11,13 +11,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
 
         :root {
-            --primary-color: #34495e; /* Midnight Blue */
-            --secondary-color: #7f8c8d; /* Gray */
-            --text-dark: #2c3e50; /* Darker Blue */
-            --price-color: #27ae60; /* Green */
-            --bg-light: #ecf0f1; /* Light Gray */
-            --card-bg: #ffffff; /* White */
-            --header-bg: linear-gradient(135deg, #2c3e50, #3498db);
+            --primary-color: #1a1a1a; /* Dark Charcoal */
+            --secondary-color: #555;
+            --text-dark: #222;
+            --price-color: #c49a3c; /* Gold */
+            --bg-light: #f5f5f5; /* Off-white */
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(45deg, #111, #333);
         }
 
         body {
@@ -32,29 +32,41 @@
             padding: 4rem 0;
             border-bottom-left-radius: 50% 20px;
             border-bottom-right-radius: 50% 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
         }
 
         .main-title {
             color: white;
             font-weight: 700;
-            font-size: 2.5rem;
+            font-size: 3rem;
             position: relative;
-            padding-bottom: 1rem;
+            padding-bottom: 1.5rem;
             margin-bottom: 1rem !important;
         }
 
         .main-title::after {
             content: '';
             display: block;
-            width: 80px;
-            height: 4px;
-            background: white;
-            border-radius: 2px;
+            width: 100px;
+            height: 5px;
+            background: var(--price-color);
+            border-radius: 3px;
             position: absolute;
             bottom: 0;
             right: 50%;
             transform: translateX(50%);
+        }
+        
+        .update-text {
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+        
+        .update-time {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            display: block;
         }
 
         .category-container {
@@ -72,27 +84,27 @@
 
         .category-badge {
             display: inline-block;
-            padding: 0.5rem 1.5rem;
+            padding: 0.7rem 2rem;
             margin: 0.5rem;
             background-color: var(--card-bg);
             color: var(--text-dark);
-            border-radius: 25px;
+            border-radius: 30px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
         }
         
         .category-badge.active, .category-badge:hover {
             background-color: var(--primary-color);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            color: var(--price-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
         .product-card {
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
             height: 100%;
             border: none;
             border-radius: 12px;
@@ -103,8 +115,8 @@
         }
         
         .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
         }
 
         .card-img-top {
@@ -126,26 +138,26 @@
         
         .card-title {
             font-weight: 600;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             color: var(--text-dark);
         }
         
         .card-text {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--secondary-color);
             margin-top: 0.5rem;
             flex-grow: 1;
         }
         
         .price-text {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--price-color);
             margin-top: 1rem;
         }
         
         .price-currency {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
             color: var(--price-color);
         }
@@ -155,15 +167,17 @@
             bottom: 25px;
             right: 25px;
             z-index: 1000;
-            font-size: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: transform 0.2s ease-in-out;
+            font-size: 24px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             border-radius: 50px;
             animation: pulse-animation 2s infinite;
         }
-        
+
         .whatsapp-float-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
         }
 
         @keyframes pulse-animation {
@@ -179,23 +193,24 @@
                 bottom: 15px;
                 border-radius: 10px;
                 text-align: center;
-                font-size: 16px;
+                font-size: 18px;
                 animation: none;
+                padding: 1rem;
             }
             .main-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             .card-img-top {
                 height: 180px;
             }
             .card-title {
-                font-size: 1.1rem;
+                font-size: 1.3rem;
             }
             .price-text {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
             .category-container {
-                direction: rtl; /* For touch scrolling, ensure it starts from the right */
+                direction: rtl;
             }
         }
     </style>
@@ -205,24 +220,26 @@
 <div class="main-header text-center">
     <div class="container py-5">
         <h1 class="main-title">لیست قیمت - ویژه همکاران</h1>
-        <p class="text-white-50"><span id="last-updated"></span></p>
+        <p class="update-text"><span id="last-updated"></span></p>
     </div>
 </div>
 
 <div class="container mt-4">
     <div id="category-badges" class="category-container">
-        </div>
+        <!-- Category badges will be dynamically loaded here -->
+    </div>
     <div id="product-list" class="row g-4 mt-4">
-        </div>
+        <!-- Products will be dynamically loaded here -->
+    </div>
 </div>
 
+<!-- Floating WhatsApp Button -->
 <a href="https://wa.me/989123456789" class="btn btn-success whatsapp-float-btn" target="_blank">
     <i class="fab fa-whatsapp me-2"></i> ارتباط از طریق واتساپ
 </a>
 
 <script>
     let allCategories = [];
-    const lastUpdatedElement = document.getElementById('last-updated');
 
     fetch('./products.json')
         .then(response => {
@@ -233,7 +250,14 @@
         })
         .then(data => {
             allCategories = data.categories;
-            updateLastUpdated(new Date());
+            const lastUpdatedElement = document.getElementById('last-updated');
+            const currentDate = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            const persianDate = new Intl.DateTimeFormat('fa-IR', options).format(currentDate);
+            lastUpdatedElement.innerHTML = `
+                <strong style="font-size: 1.2rem;">آخرین به‌روزرسانی:</strong><br>
+                <span style="font-size: 1rem;">${persianDate}</span>
+            `;
             
             renderCategories(allCategories);
             renderProducts(allCategories);
@@ -242,36 +266,6 @@
             console.error('خطا:', error);
             document.getElementById('product-list').innerHTML = `<p class="text-center text-danger col-12">خطا در بارگذاری اطلاعات محصولات. لطفاً از وجود فایل و ساختار صحیح آن اطمینان حاصل کنید.</p>`;
         });
-
-    function updateLastUpdated(updateTime) {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const dateString = new Intl.DateTimeFormat('fa-IR', options).format(updateTime);
-        const timeString = updateTime.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' });
-        
-        const now = new Date();
-        const diffInSeconds = Math.floor((now - updateTime) / 1000);
-        
-        let diffString = '';
-        const minutes = Math.floor(diffInSeconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        
-        if (days > 0) {
-            diffString = `${days} روز و ${hours % 24} ساعت پیش`;
-        } else if (hours > 0) {
-            diffString = `${hours} ساعت و ${minutes % 60} دقیقه پیش`;
-        } else if (minutes > 0) {
-            diffString = `${minutes} دقیقه پیش`;
-        } else {
-            diffString = 'همین الان';
-        }
-        
-        lastUpdatedElement.innerHTML = `
-            <strong style="font-size: 1.2rem;">آخرین به‌روزرسانی:</strong><br>
-            <span style="font-size: 1rem;">${dateString} ساعت ${timeString}</span><br>
-            <small class="text-white-50" style="font-size: 0.9rem;">(${diffString})</small>
-        `;
-    }
 
     function renderCategories(categories) {
         const categoryBadgesContainer = document.getElementById('category-badges');
